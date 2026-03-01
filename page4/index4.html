@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta name="title" content="小郭童鞋">	<link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<style type="text/css">
+		@font-face {
+			font-family: digit;
+			src: url('digital.ttf') format("truetype");
+		}
+	</style>
+	<link href="css/default.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/garden.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+</head>
+
+<body>
+	<div id="mainDiv">
+		<div id="content">
+			<div id="code">
+				<span class="comments">##</span><br />
+				<span class="comments"># 我是一个程序员</span><br />
+				<span class="comments"># 所以我打算用这种方式向你表达</span><br />
+				<span class="comments">##</span><br />
+				i = Boy(<span class="string">"小王童鞋"</span>);<br />
+				u = Girl(<span class="string">"小郭童鞋"</span>);<br />
+				<span class="comments"># 2026年1月24日，我们认识了彼此 </span><br />
+				i.known(u)<br />
+				<span class="comments"># 1月25日，我们加了彼此的联系方式</span><br />
+				i.added(u)<br />
+				<span class="comments"># 从这天起，我们每天都在唠嗑</span><br />
+				i.chatting with(u)<br />
+				<span class="comments"># 由于我嘴比较笨，所以每天都是重复报备式的唠嗑</span><br />
+				<span class="comments"># 但是我不想只在线上聊天</span><br />
+				<span class="comments"># 在多次协调时间之后</span><br />
+				<span class="comments"># 终于，在2026年2月23日（农历正月初七）这一天，我们第一次见面了</span><br />
+				meeting(u, i)<br />
+				<span class="comments"># 说心里话，去找你的路上，我真的很紧张</span><br />
+				nervous(i)<br />
+				<span class="comments"># 很担心你看见我之后会很失望</span><br />
+				<span class="comments"># 担心你会因为不符合你的预期而尽快结束，但好在你没有</span><br />
+				eatting(u, i, sometimes=<span class="keyword">True</span>)<br />
+				<span class="comments"># 所以在吃饭和看电影的过程中，因为比较紧张并且不太熟，所以有些语无伦次</span><br />
+				<span class="comments"># 不过在了解的过程中，我逐渐发现你是一个很温柔、可爱、知性的人</span><br />
+				<span class="comments"># 因此，在每天的聊天过程中，对你的好感也逐渐增加</span><br />
+				while <span class="keyword">True</span>:<br />
+				<span class="placeholder"></span><span class="keyword">if</span> i.with(u):<br />
+				<span class="placeholder"></span><span class="placeholder"></span>u = everything<br />
+				<span class="placeholder"></span><span class="keyword">else</span>:<br />
+				<span class="placeholder"></span><span class="placeholder"></span>everything = u<br />
+				<span class="comments"># 不过嘞，我还是希望你</span><br />
+				<span class="comments"># 能多给我分享一点你遇见的趣事</span><br />
+				<span class="comments"># 要不然的话，我有时候也不知道聊啥呢</span><br />
+				<span class="comments"># 我现在也学者拿出最放松的姿态，用平常心跟你唠嗑</span><br />
+				<span class="comments"># 就像你说的：又不是只有恋爱</span><br />
+				<span class="comments"># 所以我希望咱们彼此互相多分享一些</span><br />
+				<span class="comments"># 这样才会更长久一点呀~</span><br />
+				i.accompany(u, in_the_future=<span class="keyword">True</span>)<br />
+				i.live_happily_forever_with(u)<br />
+			</div>
+			<div id="loveHeart">
+				<canvas id="garden"></canvas>
+				<div id="words">
+					<div id="messages">
+						距离我们认识已经有：
+						<div id="elapseClock"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var offsetX = $("#loveHeart").width() / 2;
+		var offsetY = $("#loveHeart").height() / 2 - 55;
+		var together = new Date();
+		// 此处月份介于 0 ~ 11 之间。用本地时间表示，如 8 月要用 7 表示。
+		together.setFullYear(2025, 12, 24);
+		together.setHours(20);
+		together.setMinutes(0);
+		together.setSeconds(0);
+		together.setMilliseconds(0);
+
+		if (!document.createElement('canvas').getContext) {
+			var msg = document.createElement("div");
+			msg.id = "errorMsg";
+			msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+			document.body.appendChild(msg);
+			$("#code").css("display", "none")
+			$("#copyright").css("position", "absolute");
+			$("#copyright").css("bottom", "10px");
+			document.execCommand("stop");
+		} else {
+			setTimeout(function () {
+				startHeartAnimation();
+			}, 5000);
+
+			timeElapse(together);
+			setInterval(function () {
+				timeElapse(together);
+			}, 500);
+
+			adjustCodePosition();
+			$("#code").typewriter();
+		}
+		
+		// 添加全局点击事件监听器，点击任何地方都跳转到page5
+		document.addEventListener('click', function() {
+			window.location.href = '../page5/index5.html';
+		});
+	</script>
+</body>
+
+</html>
