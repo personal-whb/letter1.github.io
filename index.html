@@ -2,57 +2,160 @@
 
 <head>
     <meta charset="utf-8">
-    <title>小张童鞋</title>
+    <title>给小张童鞋的一封信</title>
     <meta name="language" content="zh-CN">
     <meta name="title" content="小张童鞋">
     <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
     <link href="css/hovertreewelcome.css" type="text/css" rel="stylesheet">
+    <style>
+        #mood-section {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.9s ease;
+        }
+        #mood-section.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #h3 {
+            visibility: hidden;
+        }
+        #h3.transition-in {
+            visibility: visible;
+        }
+        #h3 [class^="letter-"] {
+            opacity: 0;
+        }
+        #h3.transition-in [class^="letter-"] {
+            opacity: 1;
+        }
+
+        /* ── Fancy buttons ── */
+        .fancy-btn {
+            margin: 0 14px;
+            padding: 13px 34px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        #btn-expect {
+            background: linear-gradient(135deg, #f9a8d4 0%, #f472b6 40%, #c084fc 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(244,114,182,0.55), 0 0 24px rgba(192,132,252,0.35);
+            animation: pulse-expect 2.2s ease-in-out infinite;
+            transform-origin: center;
+            transition: box-shadow 0.3s ease, filter 0.3s ease,
+                        transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        #btn-expect:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 6px 28px rgba(244,114,182,0.75), 0 0 36px rgba(192,132,252,0.55);
+        }
+        @keyframes pulse-expect {
+            0%,100% { box-shadow: 0 4px 18px rgba(244,114,182,0.55), 0 0 24px rgba(192,132,252,0.35); }
+            50%      { box-shadow: 0 4px 32px rgba(244,114,182,0.85), 0 0 48px rgba(192,132,252,0.65); }
+        }
+        #btn-run {
+            background: linear-gradient(135deg, #67e8f9 0%, #38bdf8 50%, #818cf8 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(56,189,248,0.5), 0 0 20px rgba(129,140,248,0.35);
+            transition: box-shadow 0.3s ease, filter 0.3s ease;
+        }
+        #btn-run:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 6px 28px rgba(56,189,248,0.75), 0 0 32px rgba(129,140,248,0.55);
+        }
+
+        /* ── Arrows (positioned by JS, shaft + head design) ── */
+        .arrow-pos {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .arrow-pos.visible { opacity: 1; }
+        .arrow-h {
+            display: inline-flex;
+            align-items: center;
+            color: #f9a8d4;
+            filter: drop-shadow(0 0 10px rgba(244,114,182,0.95));
+        }
+        .arrow-v {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            color: #f9a8d4;
+            filter: drop-shadow(0 0 10px rgba(244,114,182,0.95));
+        }
+        .shaft-h { width: 45px; height: 3px; background: currentColor; border-radius: 2px; }
+        .shaft-v { width: 3px; height: 45px; background: currentColor; border-radius: 2px; }
+        .arrow-head { font-size: 1.3rem; line-height: 1; }
+        .arr-br { animation: arr-bounce-r 0.7s ease-in-out infinite alternate; }
+        .arr-bl { animation: arr-bounce-l 0.7s ease-in-out infinite alternate; }
+        .arr-bd { animation: arr-bounce-d 0.7s ease-in-out infinite alternate; }
+        .arr-bu { animation: arr-bounce-u 0.7s ease-in-out infinite alternate; }
+        @keyframes arr-bounce-r { from{transform:translateX(0)}  to{transform:translateX(9px)}  }
+        @keyframes arr-bounce-l { from{transform:translateX(0)}  to{transform:translateX(-9px)} }
+        @keyframes arr-bounce-d { from{transform:translateY(0)}  to{transform:translateY(9px)}  }
+        @keyframes arr-bounce-u { from{transform:translateY(0)}  to{transform:translateY(-9px)} }
+
+        /* ── Run messages: normal flow, stacks below btn-group, above scaled button ── */
+        #run-messages {
+            position: relative;
+            z-index: 1000;
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            pointer-events: none;
+        }
+        .run-msg {
+            color: #fff;
+            font-size: 1.15rem;
+            font-weight: bold;
+            text-shadow: 0 0 16px rgba(244,114,182,1), 0 2px 6px rgba(0,0,0,0.5);
+            animation: fadeInUp 0.5s ease;
+            margin: 0;
+            white-space: nowrap;
+            background: rgba(244,114,182,0.18);
+            padding: 5px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(244,114,182,0.45);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0);    }
+        }
+    </style>
 </head>
 
 <body>
     <div id="hovertreecontainer">
 
         <div>
-            <h1 id="h1">小张童鞋</h1>
+            <h1 id="h1">给小张童鞋的一封信</h1>
             <br>
             <h2 id="h2">这是给你写的第一封信</h2>
             <br>
-            <h3 id="h3">有没有一点点的期待？</h3>
+            <div id="mood-section">
+            <h3 id="h3">看到这个标题的你是什么心情呀？</h3>
             <!-- 按钮区域 -->
-            <div id="btn-group" style="position:relative; z-index:100; pointer-events:auto;">
-                <button onclick="handleExpect(true)" style="
-                    margin: 0 12px;
-                    padding: 10px 28px;
-                    font-size: 1rem;
-                    border: 2px solid #fff;
-                    background: rgba(255,255,255,0.15);
-                    color: #fff;
-                    border-radius: 24px;
-                    cursor: pointer;
-                    backdrop-filter: blur(4px);
-                    transition: background 0.3s;
-                    pointer-events: auto;
-                " onmouseover="this.style.background='rgba(255,255,255,0.35)'"
-                        onmouseout="this.style.background='rgba(255,255,255,0.15)'">期待</button>
-                <button onclick="handleExpect(false)" style="
-                    margin: 0 12px;
-                    padding: 10px 28px;
-                    font-size: 1rem;
-                    border: 2px solid #fff;
-                    background: rgba(255,255,255,0.15);
-                    color: #fff;
-                    border-radius: 24px;
-                    cursor: pointer;
-                    backdrop-filter: blur(4px);
-                    transition: background 0.3s;
-                    pointer-events: auto;
-                " onmouseover="this.style.background='rgba(255,255,255,0.35)'"
-                        onmouseout="this.style.background='rgba(255,255,255,0.15)'">不期待</button>
+            <div id="btn-group" style="position:relative; z-index:100; pointer-events:auto; display:flex; align-items:center; justify-content:center; padding:12px 20px; overflow:visible;">
+                <div class="arrow-pos" id="arrow-left"><span class="arrow-h arr-br"><span class="shaft-h"></span><span class="arrow-head">▶</span></span></div>
+                <div class="arrow-pos" id="arrow-right"><span class="arrow-h arr-bl"><span class="arrow-head">◀</span><span class="shaft-h"></span></span></div>
+                <div class="arrow-pos" id="arrow-top"><span class="arrow-v arr-bd"><span class="shaft-v"></span><span class="arrow-head">▼</span></span></div>
+                <div class="arrow-pos" id="arrow-bot"><span class="arrow-v arr-bu"><span class="arrow-head">▲</span><span class="shaft-v"></span></span></div>
+                <button id="btn-expect" onclick="handleExpect(true)" class="fancy-btn">一整个期待住了～</button>
+                <button id="btn-run" onclick="handleExpect(false)" class="fancy-btn">我可以跑呀～</button>
+            </div>
+            <div id="run-messages"></div>
             </div>
             <!-- 响应文本，初始隐藏 -->
             <h3 id="response-text" style="display:none; position:relative; z-index:100;"></h3>
-            <br>
-            <h4 id="h4">后边的页面有有背景音乐哦</h4>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
@@ -64,11 +167,10 @@
     </div>
 
     <canvas id="canvas" style="pointer-events:none;"></canvas>
-    <audio autoplay="autoplay">
-        <source src="index_1.html" type="audio/mpeg">
+    <audio id="bgmMusic" src="bgm.mp3" loop preload="auto" type="audio/mpeg" autoplay>
         您的浏览器不支持播放音乐。请用支持html5的浏览器打开,例如chrome或火狐或者新版IE等。
-
     </audio>
+    <script type="text/javascript" src="js/bgm-persist.js"></script>
     <script type="text/javascript" src="js/hovertreewelcome.js">
     </script>
     <script type="text/javascript">
@@ -322,7 +424,10 @@
                 }
             }
 
-            function letters(id) {
+            function letters(id, onLineComplete, transitionInDelay) {
+                var delay = (typeof transitionInDelay === 'number')
+                    ? transitionInDelay
+                    : (Math.random() * 500) + 500;
 
                 var el = document.getElementById(id),
                     letters = el.innerHTML.replace('&amp;', '&').split(''),
@@ -334,9 +439,28 @@
                 }
 
                 el.innerHTML = heading;
-                setTimeout(function () {
+                function applyTransitionIn() {
                     el.className = 'transition-in';
-                }, (Math.random() * 500) + 500);
+                    if (onLineComplete) {
+                        var spans = el.querySelectorAll('[class^="letter-"]');
+                        if (!spans.length) {
+                            onLineComplete();
+                            return;
+                        }
+                        var last = spans[spans.length - 1];
+                        function onLastLetterTransitionEnd(ev) {
+                            if (ev.propertyName !== 'opacity') return;
+                            last.removeEventListener('transitionend', onLastLetterTransitionEnd);
+                            onLineComplete();
+                        }
+                        last.addEventListener('transitionend', onLastLetterTransitionEnd);
+                    }
+                }
+                if (delay === 0) {
+                    applyTransitionIn();
+                } else {
+                    setTimeout(applyTransitionIn, delay);
+                }
             }
 
             function save() {
@@ -400,9 +524,19 @@
                     offset: 285
                 });
 
-                letters('h1');
-                letters('h2');
-                letters('h3');
+                var firstLinesLeft = 2;
+                function onFirstTwoLinesComplete() {
+                    firstLinesLeft--;
+                    if (firstLinesLeft > 0) return;
+                    letters('h3', null, 0);
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            document.getElementById('mood-section').classList.add('is-visible');
+                        });
+                    });
+                }
+                letters('h1', onFirstTwoLinesComplete);
+                letters('h2', onFirstTwoLinesComplete);
 
                 document.addEventListener('mousemove', init);
                 document.addEventListener('touchstart', init);
@@ -438,20 +572,76 @@
 
     </script>
     <script>
-        function handleExpect(isExpect) {
-            var btnGroup = document.getElementById('btn-group');
-            var responseText = document.getElementById('response-text');
+        var runClickCount = 0;
+        var expectScale   = 1;
+        var runMsgTexts   = [
+            '还想跑？不可能给你这个机会！！！',
+            '这么绝情的嘛～我好伤心啊～～～～',
+            '别跑啦，再跑要追不上啦'
+        ];
 
-            responseText.style.display = 'block';
+        function updateArrows() {
+            var btn   = document.getElementById('btn-expect');
+            var group = document.getElementById('btn-group');
+            var br = btn.getBoundingClientRect();
+            var gr = group.getBoundingClientRect();
+            var bL = br.left   - gr.left,  bR = br.right  - gr.left;
+            var bT = br.top    - gr.top,   bB = br.bottom - gr.top;
+            var cX = bL + br.width / 2,    cY = bT + br.height / 2;
+            var GAP = 10, SHAFT = 45, HEAD = 21, LEN = SHAFT + HEAD;
+
+            var aL = document.getElementById('arrow-left');
+            var aR = document.getElementById('arrow-right');
+            var aT = document.getElementById('arrow-top');
+            var aB = document.getElementById('arrow-bot');
+
+            aL.style.left = (bL - GAP - LEN) + 'px';  aL.style.top = (cY - HEAD/2) + 'px';
+            aR.style.left = (bR + GAP)        + 'px';  aR.style.top = (cY - HEAD/2) + 'px';
+            aT.style.left = (cX - HEAD/2)     + 'px';  aT.style.top = (bT - GAP - LEN) + 'px';
+            aB.style.left = (cX - HEAD/2)     + 'px';  aB.style.top = (bB + GAP)        + 'px';
+        }
+
+        function trackArrows(duration) {
+            var end = Date.now() + duration;
+            (function frame() {
+                updateArrows();
+                if (Date.now() < end) requestAnimationFrame(frame);
+            })();
+        }
+
+        function handleExpect(isExpect) {
+            var btnGroup     = document.getElementById('btn-group');
+            var responseText = document.getElementById('response-text');
 
             if (isExpect) {
                 btnGroup.style.display = 'none';
-                responseText.textContent = '接下来请欣赏小王童鞋制作的童话故事~';
+                document.getElementById('run-messages').style.display = 'none';
+                responseText.style.display  = 'block';
+                responseText.textContent    = '那么接下来请欣赏小王童鞋精心制作的童话故事~';
                 document.addEventListener('click', function () {
                     window.location.href = 'page2/index2.html';
                 });
             } else {
-                responseText.textContent = '小王的期望值可是很高呢，就满足他一下呗~';
+                runClickCount++;
+
+                if (runClickCount <= runMsgTexts.length) {
+                    var p = document.createElement('div');
+                    p.className   = 'run-msg';
+                    p.textContent = runMsgTexts[runClickCount - 1];
+                    document.getElementById('run-messages').appendChild(p);
+                }
+
+                expectScale += 0.28;
+                document.getElementById('btn-expect').style.transform = 'scale(' + expectScale + ')';
+
+                if (runClickCount === 1) {
+                    updateArrows();
+                    document.querySelectorAll('.arrow-pos').forEach(function(a) {
+                        a.classList.add('visible');
+                    });
+                }
+
+                trackArrows(500);
             }
         }
     </script>

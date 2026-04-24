@@ -3,7 +3,11 @@ body {
     padding: 0;
     background: #fdc9d1;
     font-size: 12px;
-    overflow: auto
+    overflow: hidden
+}
+
+#content {
+    transform-origin: top left;
 }
 
 #mainDiv {
