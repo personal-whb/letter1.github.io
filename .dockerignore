@@ -1,0 +1,6 @@
+.git
+.idea
+*.tar
+README.md
+Dockerfile
+.dockerignore
